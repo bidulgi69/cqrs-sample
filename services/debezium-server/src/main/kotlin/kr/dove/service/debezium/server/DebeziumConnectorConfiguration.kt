@@ -30,7 +30,8 @@ class DebeziumConnectorConfiguration(
             .with("database.password", password)
             .with("database.dbname", database)
             .with("database.include.list", database)
-            //  The table name to be excluded or included is written as follows: schema_table
+            //  The table name to be excluded or included is written as follows: schema.table
+            //  *.include.list and *.exclude.list are not compatible. (https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-property-database-include-list)
             .with("table.include.list", "order_db.outbox")
             //  .with("table.exclude.list", "order_db.orders,order_db.customers,order_db.deliveries,order_db.cooks,order_db.payments,order_db.tickets,order_db.restaurants,order_db.menus")
             .with("database.server.name", "database.mysql.server-${UUID.randomUUID().toString().substring(0, 4)}")
