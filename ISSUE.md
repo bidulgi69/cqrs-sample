@@ -1,5 +1,5 @@
 ## issue-1
-> `embedded-debezium` 과 `spring-cloud-function` 라이브러리 동시 사용 시, `StreamBridge` 클래스가 spring bean 으로 정상적으로 등록되지 않음.<br>
+> `embedded-debezium` 과 `spring-cloud-stream` 라이브러리 동시 사용 시, `StreamBridge` 클래스가 spring bean 으로 정상적으로 등록되지 않음.<br>
 아래 깃허브 링크에 동일한 에러에 대한 이슈가 등록돼 있음.<br>
 >
 > When using `embedded-debezium` library with `spring-cloud-function` library, `StreamBridge` class is not successfully registered as a spring bean.<br>
