@@ -1,0 +1,53 @@
+server:
+  port: 8084
+  shutdown: graceful
+
+spring:
+  application:
+    name: payment-service
+  r2dbc:
+    username: root
+    password: root
+    url: mysql://localhost:3306/order_db?characterEncoding=UTF-8&useSSL=false
+  cloud:
+    function:
+      definition: orderMessageConsumer
+    stream:
+      default-binder: kafka
+      default:
+        contentType: application/json
+      bindings:
+        orderMessageConsumer-in-0:
+          destination: order-payment
+          group: paymentGroup
+        orderMessageConsumer-in-0.consumer:
+          - maxAttempts=3
+          - backOffInitialInterval=500
+          - backOffMaxInterval=1000
+          - backOffMultiplier=2.0
+      kafka:
+        bindings:
+          orderMessageConsumer-in-0.consumer:
+            - enableDlq=true
+        binder:
+          brokers: localhost
+        defaultBrokerPort: 9092
+  lifecycle:
+    timeout-per-shutdown-phase: 10s
+
+logging:
+  level:
+    root: info
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  r2dbc:
+    url: mysql://mysql:3306/order_db?characterEncoding=UTF-8&useSSL=false
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: kafka

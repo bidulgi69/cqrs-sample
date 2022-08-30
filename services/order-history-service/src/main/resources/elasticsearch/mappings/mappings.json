@@ -1,0 +1,60 @@
+{
+  "properties": {
+    "orderId": {
+      "type": "text"
+    },
+    "state": {
+      "type": "keyword"
+    },
+    "customerId": {
+      "type": "text"
+    },
+    "restaurantId": {
+      "type": "text"
+    },
+    "payment": {
+      "properties": {
+        "cvc": {
+          "type": "text"
+        },
+        "number": {
+          "type": "text"
+        },
+        "yy": {
+          "type": "text"
+        },
+        "mm": {
+          "type": "text"
+        }
+      }
+    },
+    "orderItems": {
+      "properties": {
+        "menuItemId": {
+          "type": "keyword"
+        },
+        "quantity": {
+          "type": "integer"
+        }
+      }
+    },
+    "ticketId": {
+      "type": "text"
+    },
+    "acceptTime": {
+      "type": "long"
+    },
+    "readyTime": {
+      "type": "long"
+    },
+    "preparingTime": {
+      "type": "long"
+    },
+    "pickedUpTime": {
+      "type": "long"
+    },
+    "deliveryCompletedTime": {
+      "type": "long"
+    }
+  }
+}

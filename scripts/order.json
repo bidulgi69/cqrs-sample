@@ -1,0 +1,21 @@
+{
+  "id": 1,
+  "customerId": 1,
+  "restaurantId": 1,
+  "payment": {
+    "cvc": "111",
+    "number": "0123456789",
+    "yy": "24",
+    "mm": "01"
+  },
+  "orderItems": [
+    {
+      "menuItemId": "1",
+      "quantity": 2
+    },
+    {
+      "menuItemId": "2",
+      "quantity": 1
+    }
+  ]
+}

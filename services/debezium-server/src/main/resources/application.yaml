@@ -1,0 +1,34 @@
+server:
+  shutdown: graceful
+  port: 8087
+
+debezium:
+  mysql:
+    hostname: localhost
+    port: 3306
+    username: root
+    password: root
+    database: order_db
+
+kafka:
+  bootstrapAddress: localhost:9092
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 10s
+
+logging:
+  level:
+    root: info
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+
+debezium:
+  mysql:
+    hostname: mysql
+
+kafka:
+  bootstrapAddress: kafka:9092
