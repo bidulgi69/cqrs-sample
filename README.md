@@ -1,12 +1,13 @@
 # CQRS-sample
 Sample project implementing CQRS pattern.
+<br><br>
 
 ## What is CQRS pattern?
 In a microservice application, it is difficult to implement a query that retrieves data that spans multiple services.<br>
 If you don't have a lot of services involved, it's also a good choice to configure with the API Composition pattern.
 It is to define a query in each of the services involved, combine data in one service and return a value.
 
-However, the API Composition pattern has the following disadvantages.
+<br>However, the API Composition pattern has the following disadvantages.
 
 1. Increased Overhead
 <br>An increase in overhead is unavoidable because multiple services and DBs are called multiple times. As network resource usage increases, operating costs will increase.<br><br>
@@ -15,11 +16,12 @@ However, the API Composition pattern has the following disadvantages.
 3. Lack of Data Consistency
 <br>Because ACID transactions are not guaranteed, the data queried by each service may be inconsistent.<br>
 
-Command Query Responsibility Segregation (CQRS), as its name suggests, is the segregation of responsibility for processing queries from the responsibility of processing commands in the system.<br>
-That is, the query (`R, Http GET`) function is implemented in the query-side module, and the create/update/delete (`CUD, Http POST PUT DELETE`) function is implemented in the command-side module.<br>
+<br>
+<strong>Command Query Responsibility Segregation (CQRS)</strong>, as its name suggests, is the segregation of responsibility for processing queries from the responsibility of processing commands in the system.<br>
+That is, the query (R, Http GET) function is implemented in the query-side module, and the create/update/delete (CUD, Http POST PUT DELETE) function is implemented in the command-side module.<br>
 Data synchronization between the two modules is typically done in a way that the command-side module issues an event and the query-side module subscribes to the event. 
 
-The advantages of applying the CQRS pattern are:
+<br><br>The advantages of applying the CQRS pattern are:
 
 1. Efficient queries are available.
 <br>Stores pre-joined views of data from multiple services, there is no need for expensive in-memory joins like API Composition pattern.
@@ -27,7 +29,7 @@ The advantages of applying the CQRS pattern are:
 2. Separation of interests simplifies the management of each module.
 <br>CQRS pattern defines the DB schema for each interest in the query-side module and the command-side module. In addition, the service that implements the query may differ from the service that owns the data.<br>
 
-But there are also disadvantages of CQRS.
+<br>But there are also disadvantages of CQRS.
 
 1. Complex Architecture
 2. Handling replication lag
@@ -35,6 +37,7 @@ But there are also disadvantages of CQRS.
 This is the gap before the event issued by the command-side is consumed and processed by the query-side module.
 You must ensure that inconsistent data is not exposed to the user as much as possible.<br>
 
+<br>
 
 ## Event flow
 <img src="https://user-images.githubusercontent.com/17774927/187399789-9593b568-124f-4f22-92f8-dc628cf28197.png" alt="event flow">
@@ -64,6 +67,7 @@ You must ensure that inconsistent data is not exposed to the user as much as pos
 
 Use SERVICE-DB-Message Relay-Kafka transfer flow, not SERVICE to Kafka direct transfer.<br>
 Therefore, the act of sending a message to the topic in the above description is that the message stored in the `OUTBOX` table by the service was read by the message relay and sent to the Kafka.
+<br><br>
 
 ## State machine diagram
 <img src="https://user-images.githubusercontent.com/17774927/187406991-5a3da84f-9805-4fe1-b6fe-0b76295da921.png" alt="state machine diagram">
@@ -83,7 +87,6 @@ Therefore, the act of sending a message to the topic in the above description is
 
         make clean
 
-<br>
 
-### Issues
+## Issues
 Library issues that occurred during development have been summarized in ISSUE.md.
