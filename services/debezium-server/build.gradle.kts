@@ -18,16 +18,9 @@ dependencies {
 	implementation("io.debezium:debezium-embedded:$debeziumVersion")
 	implementation("org.springframework.kafka:spring-kafka")
 
-	testImplementation("org.springframework.cloud:spring-cloud-stream::test-binder")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.getByName<Jar>("jar") {
 	enabled = false
-}
-
-dependencyManagement {
-	imports {
-		mavenBom("org.springframework.cloud:spring-cloud-dependencies:2021.0.2")
-	}
 }
